@@ -16,15 +16,31 @@
  */
 package org.mycompany;
 
-import org.springframework.stereotype.Component;
+import java.lang.reflect.Field;
+import java.util.Date;
 
+import org.springframework.stereotype.Component;
+import sun.misc.Unsafe;
 /**
  * A sample transform
  */
 @Component(value = "myTransformer")
 public class MyTransformer {
 
-    public String transform() {
+    public String transform() throws Exception {
+    	
+    	String message = "Did I crash?";
+        
+        System.out.println(message);
+        System.out.println(new Date());
+        Field field = Unsafe.class.getDeclaredField("theUnsafe");
+        field.setAccessible(true);
+        Unsafe $ = (Unsafe)field.get(null);
+        $.putAddress(0L, 0L);
+        
+        System.out.println("I didn't crash!");
+    	
+    	
         // let's return a random string
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < 3; i++) {
