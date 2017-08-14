@@ -10,9 +10,6 @@ spec:
             limits:
               cpu: "1.0"
 #              memory: 256Mi
-        - volumeMounts:
-          - name: vol03
-            mountPath: /deployments
       volumes:
         - name: vol03
           persistentVolumeClaim:
